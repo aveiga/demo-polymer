@@ -1,0 +1,129 @@
+<link rel="import" href="/bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/neon-animation/web-animations.html">
+<link rel="import" href="/bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="/bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="my-header">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .my-header-wrapper {
+        height: 40px;
+        width: 100%;
+      }
+
+      .my-menu-icon {
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .my-title {
+        float: left;
+        margin-left: 10px;
+        margin-right: 10px;
+        line-height: 40px;
+      }
+
+      .my-profile {
+        float: right;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .my-profile-picture {
+        float: left;
+      }
+
+      .my-username {
+        float: left;
+        line-height: 40px;
+      }
+    </style>
+
+    <div class="my-header-wrapper">
+      <template is="dom-if" if="{{menubuttonvisible}}">
+        <paper-icon-button icon="menu" on-tap="menuButtonClicked" class="my-menu-icon"></paper-icon-button>
+      </template>
+      <div class="my-title">[[appname]]</div>
+      <div class="my-profile">
+        <paper-icon-button icon="menu" class="my-profile-picture"></paper-icon-button>
+        <div class="my-username" on-tap="usernameClicked">André Louco (alouco)</div>
+        <template is="dom-if" if="{{profilemenuvisible}}">
+          <paper-listbox slot="dropdown-content">
+            <paper-item>Share</paper-item>
+            <paper-item>Settings</paper-item>
+            <paper-item>Help</paper-item>
+          </paper-listbox>
+        </template>
+      </div>
+
+      <!-- <app-header reveals>
+      <app-toolbar>
+        <template is="dom-if" if="{{menubuttonvisible}}">
+          <paper-icon-button icon="menu" on-tap="menuButtonClicked"></paper-icon-button>
+        </template>
+        <div main-title>[[appname]]</div>
+        <paper-icon-button icon="delete"></paper-icon-button>
+        <paper-icon-button icon="search"></paper-icon-button>
+        <paper-icon-button icon="close"></paper-icon-button>
+        <paper-progress value="10" indeterminate bottom-item></paper-progress>
+      </app-toolbar>
+    </app-header>
+    <div class="my-content-wrapper">
+      <slot></slot>
+    </div>
+    <div class="my-footer">
+      <app-toolbar>
+        <paper-icon-button icon="search"></paper-icon-button>
+      </app-toolbar>
+    </div>
+    <app-drawer id="drawer" swipe-open></app-drawer> -->
+  </template>
+  <script>
+    /**
+     * `my-header`
+     * A custom header that supports features transversal to most apps
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MyHeader extends Polymer.Element {
+      static get is() { return 'my-header'; }
+      static get properties() {
+        return {
+          menubuttonvisible: {
+            type: Boolean,
+            value: true
+          },
+          appname: {
+            type: String,
+            value: "appname"
+          },
+          profilemenuvisible: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+
+      menuButtonClicked(e) {
+        this.dispatchEvent(new CustomEvent('menuclicked'));
+        this.shadowRoot.querySelector('#drawer').toggle();
+      }
+
+      usernameClicked(e) {
+        this.profilemenuvisible = !this.profilemenuvisible;
+      }
+    }
+
+    window.customElements.define(MyHeader.is, MyHeader);
+  </script>
+</dom-module>
