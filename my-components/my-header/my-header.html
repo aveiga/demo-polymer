@@ -5,16 +5,28 @@
 <link rel="import" href="/bower_components/paper-item/paper-item.html">
 <link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="/bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="/bower_components/paper-styles/typography.html">
+<link rel="import" href="/bower_components/paper-styles/default-theme.html">
+<link rel="import" href="/bower_components/paper-button/paper-button.html">
 
 <dom-module id="my-header">
   <template>
     <style>
       :host {
         display: block;
+        background-color: var(--dark-theme-background-color);
+        color: var(--dark-theme-text-color);
+      }
+
+      paper-listbox {
+        --paper-listbox-background-color: var(--dark-theme-background-color);
+        --paper-listbox-color: var(--dark-theme-text-color);
       }
 
       .my-header-wrapper {
-        height: 40px;
+        @apply --paper-font-common-base;
+
+        height: 70px;
         width: 100%;
       }
 
@@ -39,6 +51,11 @@
 
       .my-profile-picture {
         float: left;
+        height: 25px;
+        width: 25px;
+        border-radius: 5px;
+        line-height: 40px;
+        margin: 5px;
       }
 
       .my-username {
@@ -53,18 +70,21 @@
       </template>
       <div class="my-title">[[appname]]</div>
       <div class="my-profile">
-        <paper-icon-button icon="menu" class="my-profile-picture"></paper-icon-button>
-        <div class="my-username" on-tap="usernameClicked">André Louco (alouco)</div>
+        <paper-button raised class="raised" on-tap="usernameClicked" height="30px">
+          <img src="[[userprofileimageurl]]" class="my-profile-picture">
+          <div class="my-username">[[user]]</div>
+        </paper-button>
         <template is="dom-if" if="{{profilemenuvisible}}">
-          <paper-listbox slot="dropdown-content">
+          <paper-listbox>
             <paper-item>Share</paper-item>
             <paper-item>Settings</paper-item>
             <paper-item>Help</paper-item>
           </paper-listbox>
         </template>
       </div>
+    </div>
 
-      <!-- <app-header reveals>
+    <!-- <app-header reveals>
       <app-toolbar>
         <template is="dom-if" if="{{menubuttonvisible}}">
           <paper-icon-button icon="menu" on-tap="menuButtonClicked"></paper-icon-button>
@@ -103,10 +123,9 @@
             type: Boolean,
             value: true
           },
-          appname: {
-            type: String,
-            value: "appname"
-          },
+          appname: String,
+          user: String,
+          userprofileimageurl: String,
           profilemenuvisible: {
             type: Boolean,
             value: false
@@ -116,7 +135,6 @@
 
       menuButtonClicked(e) {
         this.dispatchEvent(new CustomEvent('menuclicked'));
-        this.shadowRoot.querySelector('#drawer').toggle();
       }
 
       usernameClicked(e) {
