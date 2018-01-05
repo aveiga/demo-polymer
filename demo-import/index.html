@@ -24,6 +24,16 @@
     <link rel="import" href="http://localhost:8080/my-header.html">
   </head>
   <body>
-    <my-header appname="My New App"></my-header>
+    <my-header
+      appname="My New App"
+      user="André Veiga (aveiga)"
+      userprofileimageurl="https://www.atomix.com.au/media/2015/06/atomix_user31.png">
+    </my-header>
+
+    <script type="text/javascript">
+      document.querySelector('my-header').addEventListener('menuclicked', _ => {
+        console.log('menu button clicked');
+      });
+    </script>
   </body>
 </html>
