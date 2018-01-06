@@ -62,6 +62,12 @@
         float: left;
         line-height: 40px;
       }
+
+      .my-profile-button {
+        height: 40px;
+        text-transform: unset;
+        box-shadow: none;
+      }
     </style>
 
     <div class="my-header-wrapper">
@@ -70,15 +76,13 @@
       </template>
       <div class="my-title">[[appname]]</div>
       <div class="my-profile">
-        <paper-button raised class="raised" on-tap="usernameClicked" height="30px">
+        <paper-button raised class="raised my-profile-button" on-tap="usernameClicked" height="30px">
           <img src="[[userprofileimageurl]]" class="my-profile-picture">
           <div class="my-username">[[user]]</div>
         </paper-button>
         <template is="dom-if" if="{{profilemenuvisible}}">
           <paper-listbox>
-            <paper-item>Share</paper-item>
-            <paper-item>Settings</paper-item>
-            <paper-item>Help</paper-item>
+            <paper-item>Log Out</paper-item>
           </paper-listbox>
         </template>
       </div>
