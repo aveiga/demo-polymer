@@ -21,7 +21,8 @@
 
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="http://localhost:8080/my-header.html">
+    <link rel="import" href="http://localhost:8080/my-header/my-header.html">
+    <link rel="import" href="http://localhost:8080/my-footer/my-footer.html">
   </head>
   <body>
     <my-header
@@ -29,7 +30,9 @@
       user="André Veiga (aveiga)"
       userprofileimageurl="https://www.atomix.com.au/media/2015/06/atomix_user31.png">
     </my-header>
-
+    <my-footer>
+      
+    </my-footer>
     <script type="text/javascript">
       document.querySelector('my-header').addEventListener('menuclicked', _ => {
         console.log('menu button clicked');
