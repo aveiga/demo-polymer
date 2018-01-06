@@ -1,13 +1,37 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/time-display/time-display.html">
+<link rel="import" href="../my-styles/my-theme.html">
 
 <dom-module id="my-footer">
   <template>
     <style>
       :host {
         display: block;
+
+        background-color: var(--dark-theme-background-color);
+        color: var(--dark-theme-text-color);
+      }
+
+      .my-footer-wrapper {
+        @apply --paper-font-common-base;
+
+        height: 40px;
+        width: 100%;
+
+        line-height: 40px;
+      }
+
+      .my-time-wrapper {
+        margin: 0 10px 0 10px;
+        float: right;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <div class="my-footer-wrapper">
+      <div class="my-time-wrapper">
+        <time-display datetime="[[currentdate]]" format="dd/MM/YYYY - HH:mm:ss"></time-display>
+      </div>
+    </div>
   </template>
 
   <script>
@@ -23,11 +47,19 @@
       static get is() { return 'my-footer'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'my-footer'
+          currentdate: {
+            type: Date,
+            value: new Date()
           }
         };
+      }
+
+      ready() {
+        super.ready();
+        let cd = this.currentdate;
+        setInterval(_=>{
+          this.currentdate = new Date();
+        }, 1000);
       }
     }
 
