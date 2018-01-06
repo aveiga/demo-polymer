@@ -1,13 +1,35 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../my-styles/my-theme.html">
+<link rel="import" href="../my-header/my-header.html">
+<link rel="import" href="../my-footer/my-footer.html">
 
 <dom-module id="my-page">
   <template>
     <style>
       :host {
         display: block;
+        height: 100%;
+        width: 100%;
+      }
+
+      .my-page-wrapper {
+        height: 100%;
+        width: 100%;
+      }
+
+      .my-slot-wrapper {
+        height: calc(100% - 100px);
+        width: 100%;
+        padding: 10px;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <div class="my-page-wrapper">
+      <my-header></my-header>
+      <div class="my-slot-wrapper">
+        <slot></slot>
+      </div>
+      <my-footer></my-footer>
+    </div>
   </template>
 
   <script>

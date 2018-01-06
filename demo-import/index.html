@@ -21,22 +21,24 @@
 
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="http://localhost:8080/my-header/my-header.html">
-    <link rel="import" href="http://localhost:8080/my-footer/my-footer.html">
+    <link rel="import" href="http://localhost:8080/my-page/my-page.html">
   </head>
   <body>
-    <my-header
+    <!-- <my-header
       appname="My New App"
       user="André Veiga (aveiga)"
       userprofileimageurl="https://www.atomix.com.au/media/2015/06/atomix_user31.png">
     </my-header>
     <my-footer>
       
-    </my-footer>
-    <script type="text/javascript">
+    </my-footer> -->
+    <my-page style="height: 100%; width: 100%;">
+      Page Content
+    </my-page>
+    <!-- <script type="text/javascript">
       document.querySelector('my-header').addEventListener('menuclicked', _ => {
         console.log('menu button clicked');
       });
-    </script>
+    </script> -->
   </body>
 </html>
