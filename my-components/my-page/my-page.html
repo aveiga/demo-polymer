@@ -24,11 +24,11 @@
       }
     </style>
     <div class="my-page-wrapper">
-      <my-header></my-header>
+      <slot name="header"></slot>
       <div class="my-slot-wrapper">
         <slot></slot>
       </div>
-      <my-footer></my-footer>
+      <slot name="footer"></slot>
     </div>
   </template>
 
