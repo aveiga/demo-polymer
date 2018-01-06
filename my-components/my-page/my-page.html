@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="my-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `my-page`
+     * A custom web page that supports features transversal to most apps
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MyPage extends Polymer.Element {
+      static get is() { return 'my-page'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'my-page'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(MyPage.is, MyPage);
+  </script>
+</dom-module>
