@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="my-footer">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `my-footer`
+     * A custom footer that supports features transversal to most apps
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MyFooter extends Polymer.Element {
+      static get is() { return 'my-footer'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'my-footer'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(MyFooter.is, MyFooter);
+  </script>
+</dom-module>
