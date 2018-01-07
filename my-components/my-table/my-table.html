@@ -1,0 +1,50 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/ag-grid-polymer/ag-grid-polymer.html">
+
+<dom-module id="my-table">
+  <template>
+    <link rel="stylesheet" href="http://localhost:8080/bower_components/ag-grid/dist/styles/ag-grid.css">
+    <link rel="stylesheet" href="http://localhost:8080/bower_components/ag-grid/dist/styles/ag-theme-material.css">
+
+    <h1>Simple ag-Grid Polymer Example</h1>
+    <ag-grid-polymer style="width: 100%; height: 100%"
+                      class="ag-theme-material"
+                      rowData="{{rowData}}"
+                      columnDefs="{{columnDefs}}"
+                      onGridReady="{{onGridReady}}"></ag-grid-polymer>
+  </template>
+
+  <script>
+    /**
+     * `my-table`
+     * Table
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MyTable extends Polymer.Element {
+      static get is() { return 'my-table'; }
+      constructor() {
+        super();
+        this.rowData = [
+          { make: "Toyota", model: "Celica", price: 35000 },
+          { make: "Ford", model: "Mondeo", price: 32000 },
+          { make: "Porsche", model: "Boxter", price: 72000 }
+        ];
+        this.columnDefs = [
+          { headerName: "Make", field: "make" },
+          { headerName: "Model", field: "model"  },
+          { headerName: "Price", field: "price" }
+        ];
+      }
+
+      onGridReady() {
+        this.api.sizeColumnsToFit();
+      }
+
+    }
+
+    window.customElements.define(MyTable.is, MyTable);
+  </script>
+</dom-module>

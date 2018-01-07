@@ -1,0 +1,8 @@
+{
+  "name": "my-table",
+  "description": "Table",
+  "main": "my-table.html",
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}
