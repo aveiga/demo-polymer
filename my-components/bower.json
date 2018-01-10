@@ -13,7 +13,8 @@
     "paper-button": "^2.0.0",
     "ag-grid": "^15.0.0",
     "ag-grid-polymer": "^15.0.0",
-    "time-display": "^0.0.2"
+    "time-display": "^0.0.2",
+    "iron-ajax": "^2.0.6"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",

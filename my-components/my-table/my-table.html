@@ -1,16 +1,24 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/ag-grid-polymer/ag-grid-polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="my-table">
   <template>
     <link rel="stylesheet" href="http://localhost:8080/bower_components/ag-grid/dist/styles/ag-grid.css">
     <link rel="stylesheet" href="http://localhost:8080/bower_components/ag-grid/dist/styles/ag-theme-material.css">
 
-    <h1>Simple ag-Grid Polymer Example</h1>
-    <ag-grid-polymer style="width: 100%; height: 100%"
+    <iron-ajax
+    auto
+    url="[[url]]"
+    handle-as="json"
+    on-response="handleResponse"
+    debounce-duration="300"></iron-ajax>
+
+    <ag-grid-polymer id="grid"
+                      style="width: 100%; height: 100%"
                       class="ag-theme-material"
-                      rowData="{{rowData}}"
-                      columnDefs="{{columnDefs}}"
+                      rowData="[[rowdata]]"
+                      columnDefs="{{columndefs}}"
                       onGridReady="{{onGridReady}}"></ag-grid-polymer>
   </template>
 
@@ -25,22 +33,34 @@
      */
     class MyTable extends Polymer.Element {
       static get is() { return 'my-table'; }
+      static get properties() {
+        return {
+          url: String,
+          rowdata: Array,
+          columndefs: Array
+        };
+      }
       constructor() {
         super();
-        this.rowData = [
-          { make: "Toyota", model: "Celica", price: 35000 },
-          { make: "Ford", model: "Mondeo", price: 32000 },
-          { make: "Porsche", model: "Boxter", price: 72000 }
-        ];
-        this.columnDefs = [
-          { headerName: "Make", field: "make" },
-          { headerName: "Model", field: "model"  },
-          { headerName: "Price", field: "price" }
-        ];
+        // this.rowData = [
+        //   { make: "Toyota", model: "Celica", price: 35000 },
+        //   { make: "Ford", model: "Mondeo", price: 32000 },
+        //   { make: "Porsche", model: "Boxter", price: 72000 }
+        // ];
+        // this.columndefs = [
+        //   { headerName: "Details", field: "details" },
+        //   { headerName: "Flight Number", field: "flight_number"  },
+        //   { headerName: "Launch Year", field: "launch_year"  },
+        //   { headerName: "Site Name", field: "launch_site.site_name"  }
+        // ];
       }
 
       onGridReady() {
         this.api.sizeColumnsToFit();
+      }
+
+      handleResponse(res) {
+        this.rowdata = res.detail.response;
       }
 
     }

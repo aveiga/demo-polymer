@@ -18,7 +18,7 @@
       }
 
       .my-slot-wrapper {
-        height: calc(100% - 100px);
+        height: calc(100% - 80px);
         width: 100%;
       }
     </style>
@@ -42,14 +42,14 @@
      */
     class MyPage extends Polymer.Element {
       static get is() { return 'my-page'; }
-      static get properties() {
-        return {
-          prop1: {
-            type: String,
-            value: 'my-page'
-          }
-        };
-      }
+      // static get properties() {
+      //   return {
+      //     prop1: {
+      //       type: String,
+      //       value: 'my-page'
+      //     }
+      //   };
+      // }
     }
 
     window.customElements.define(MyPage.is, MyPage);

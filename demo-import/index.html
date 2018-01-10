@@ -19,7 +19,7 @@
     <!-- See https://goo.gl/OOhYW5 -->
     <!-- <link rel="manifest" href="/manifest.json"> -->
 
-    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="http://localhost:8080/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <script src="http://localhost:8080/bower_components/ag-grid/dist/ag-grid.noStyle.js"></script>
     <link rel="import" href="http://localhost:8080/my-header/my-header.html">
     <link rel="import" href="http://localhost:8080/my-footer/my-footer.html">
@@ -35,9 +35,11 @@
         user="André Veiga (aveiga)"
         userprofileimageurl="https://www.atomix.com.au/media/2015/06/atomix_user31.png">
       </my-header>
-      <div style="height: 100%; width: 100%;">
-          <my-table></my-table>
-      </div>
+          <my-table
+            style="height: 100%; width: 100%;"
+            url="https://api.spacexdata.com/v2/launches"
+            columndefs='[{"headerName":"Details","field":"details"},{"headerName":"Flight Number","field":"flight_number"},{"headerName":"Launch Year","field":"launch_year"},{"headerName":"Site Name","field":"launch_site.site_name"}]'>
+          </my-table>
       <my-footer slot="footer"></my-footer>
     </my-page>
     <!-- <script type="text/javascript">
