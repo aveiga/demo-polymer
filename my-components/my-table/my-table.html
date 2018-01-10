@@ -1,16 +1,24 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/ag-grid-polymer/ag-grid-polymer.html">
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/fortune-cookie/fortune-cookie.html">
 
 <dom-module id="my-table">
   <template>
     <link rel="stylesheet" href="http://localhost:8080/bower_components/ag-grid/dist/styles/ag-grid.css">
     <link rel="stylesheet" href="http://localhost:8080/bower_components/ag-grid/dist/styles/ag-theme-material.css">
 
+    <fortune-cookie
+      name="XSRF-TOKEN"
+      value="{{token}}"
+      on-handle-value-as="String">
+    </fortune-cookie>
+
     <iron-ajax
-    auto
+    id="ajax"
     url="[[url]]"
     handle-as="json"
+    headers="{{headers}}"
     on-response="handleResponse"
     debounce-duration="300"></iron-ajax>
 
@@ -37,22 +45,21 @@
         return {
           url: String,
           rowdata: Array,
-          columndefs: Array
+          columndefs: Array,
+          token: String,
+          headers: Object
         };
-      }
-      constructor() {
-        super();
-        // this.rowData = [
-        //   { make: "Toyota", model: "Celica", price: 35000 },
-        //   { make: "Ford", model: "Mondeo", price: 32000 },
-        //   { make: "Porsche", model: "Boxter", price: 72000 }
-        // ];
-        // this.columndefs = [
-        //   { headerName: "Details", field: "details" },
-        //   { headerName: "Flight Number", field: "flight_number"  },
-        //   { headerName: "Launch Year", field: "launch_year"  },
-        //   { headerName: "Site Name", field: "launch_site.site_name"  }
-        // ];
+      } 
+
+      ready() {
+        super.ready();
+
+        this.headers = {
+          "content-type": "application/json",
+          "X-CSRF-TOKEN": this.token
+        };
+
+        this.$.ajax.generateRequest();
       }
 
       onGridReady() {
