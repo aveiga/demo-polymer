@@ -1,0 +1,29 @@
+{
+  "verbose": true,
+  "plugins": {
+    "local": {
+			"disabled": true,
+			"browsers": ["chrome"]
+    },
+   "headless": {
+	   "browsers": ["chrome"],
+		 "skipSeleniumInstall": true
+   },
+   "istanbub": {
+   	"dir": "./coverage",
+   	"reporters": ["text-summary", "lcov"],
+   	"include": [
+   	        "my-test.html"
+   	],
+   	"exclude": [
+   	        "/polymer/polymer.js",
+   	        "/platform/platform.js"
+			],
+		"thresholds": {
+			"global": {
+				"statements": 100
+			}
+		}
+	 }
+  }
+}
