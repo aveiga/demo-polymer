@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="webpack-loader-trial">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]], this is such awesome!</h2>
+  </template>
+
+  <script>
+    /**
+     * `webpack-loader-trial`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class WebpackLoaderTrial extends Polymer.Element {
+      static get is() { return 'webpack-loader-trial'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'webpack-loader-trial'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(WebpackLoaderTrial.is, WebpackLoaderTrial);
+  </script>
+</dom-module>

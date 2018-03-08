@@ -1,13 +1,18 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<script src="https://unpkg.com/ag-grid/dist/ag-grid.min.js"></script>
+<link href="https://unpkg.com/ag-grid@16.0.1/dist/styles/ag-grid.css" rel="stylesheet" scope="html /deep/ ">
+<link href="https://unpkg.com/ag-grid@16.0.1/dist/styles/ag-theme-material.css" rel="stylesheet" scope="html /deep/ ">
+
 
 <dom-module id="my-test">
   <template>
+
     <style>
       :host {
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <div id="myGrid" style="height: 115px;width:500px" class="ag-theme-material"></div>
   </template>
 
   <script>
@@ -28,6 +33,25 @@
             value: 'my-test'
           }
         };
+      }
+
+      ready() {
+        super.ready();
+
+        var gridOptions = {
+          columnDefs: [
+            { headerName: "Make", field: "make" },
+            { headerName: "Model", field: "model" },
+            { headerName: "Price", field: "price" }
+          ],
+          rowData: [
+            { make: "Toyota", model: "Celica", price: 35000 },
+            { make: "Ford", model: "Mondeo", price: 32000 },
+            { make: "Porsche", model: "Boxter", price: 72000 }
+          ]
+        }
+
+        new agGrid.Grid(this.$.myGrid, gridOptions);
       }
     }
 
